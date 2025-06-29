@@ -1,0 +1,51 @@
+package task2;
+
+class Person 
+{
+    String name;
+    int age;
+
+    Person(String name, int age) 
+    {
+        this.name = name;
+        this.age = age;
+    }
+
+    void displayInfo() 
+    {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+class Employee extends Person 
+{
+    double basicSalary;
+
+    Employee(String name, int age, double basicSalary) 
+    {
+        super(name, age);
+        this.basicSalary = basicSalary;
+    }
+
+    double calculateSalary() 
+    {
+        return basicSalary + (0.10 * basicSalary);
+    }
+
+    void displayEmployeeInfo() 
+    {
+        displayInfo();
+        System.out.println("Basic Salary: " + basicSalary);
+        System.out.println("Total Salary (with 10% bonus): " + calculateSalary());
+    }
+}
+
+public class SalaryCalculation 
+{
+    public static void main(String[] args) 
+    {
+        Employee emp = new Employee("Sadhil", 20, 30000);
+        emp.displayEmployeeInfo();
+    }
+}

@@ -1,0 +1,37 @@
+package task1;
+public class BankAccount 
+{
+	    double balance;
+
+	    void deposited(double amount) 
+	    {
+	        balance = balance + amount;
+	        System.out.println("Deposited: " + amount);
+	    }
+
+	    void withdrawn(double amount) 
+	    {
+	        if (amount <= balance) 
+	        {
+	            balance = balance - amount;
+	            System.out.println("Withdrawn: " + amount);
+	        } 
+	        else 
+	        {
+	            System.out.println("Not enough balance");
+	        }
+	    }
+
+	    void showBalance() 
+	    {
+	        System.out.println("Current Balance: " + balance);
+	    }
+
+	    public static void main(String[] args) 
+	    {
+	        BankAccount acc = new BankAccount();
+	        acc.deposited(1000);
+	        acc.withdrawn(200);
+	        acc.showBalance();
+	    }
+	}

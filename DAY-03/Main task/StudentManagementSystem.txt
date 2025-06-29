@@ -1,0 +1,21 @@
+package MainTask;
+import java.util.Scanner;
+
+public class StudentManagementSystem 
+{
+	    public static void main(String[] args) 
+	    {
+	        Scanner s = new Scanner(System.in);
+
+	        System.out.print("Enter student name: ");
+	        String name = s.nextLine();
+
+	        System.out.print("Enter marks (out of 100): ");
+	        int marks = s.nextInt();
+
+	        System.out.println("\n--- Student Result ---");
+	        System.out.println("Name: " + name);
+	        System.out.println("Marks: " + marks);
+	        System.out.println("Result: " + (marks >= 40 ? "Pass" : "Fail"));
+	    }
+	}
