@@ -1,0 +1,26 @@
+package task3;
+import java.io.*;
+
+public class StringWriting 
+{
+	    public static void main(String[] args) 
+	    {
+	        try 
+	        {
+	            BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+
+	            writer.write("Hello, this is the first line.");
+	            writer.newLine();
+	            writer.write("This is the second line.");
+	            writer.newLine();
+	            writer.write("Java makes file writing simple!");
+
+	            writer.close();
+	            System.out.println("Successfully written to the file.");
+	        } 
+	        catch (IOException e) 
+	        {
+	            System.out.println("An error occurred: " + e.getMessage());
+	        }
+	    }
+	}

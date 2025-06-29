@@ -1,0 +1,101 @@
+package PostAssessment;
+
+import java.io.*;
+import java.util.*;
+
+public class CRUD 
+{
+    static final String FILE = "employees.txt";
+
+    public static void main(String[] args) throws Exception 
+    {
+        new File(FILE).createNewFile(); // Ensure file exists
+
+        Scanner sc = new Scanner(System.in);
+        while (true) 
+        {
+            System.out.println("\n1.Create 2.Read 3.Update 4.Delete 5.Exit:");
+            switch (sc.nextInt()) 
+            {
+                case 1: create(sc); 
+                break;
+                case 2: read(); 
+                break;
+                case 3: update(sc); 
+                break;
+                case 4: delete(sc); 
+                break;
+                case 5: System.exit(0);
+            }
+        }
+    }
+
+    static void create(Scanner sc) throws IOException 
+    {
+        sc.nextLine(); // Clear leftover newline
+        System.out.print("ID & Name: ");
+        String input = sc.nextLine();
+        String[] parts = input.trim().split("\\s+", 2);
+        int id = Integer.parseInt(parts[0]);
+        String name = parts.length > 1 ? parts[1] : "";
+        try (FileWriter fw = new FileWriter(FILE, true)) 
+        {
+            fw.write(id + "," + name + "\n");
+        }
+    }
+
+    static void read() throws IOException 
+    {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE))) 
+        {
+            String line;
+            while ((line = br.readLine()) != null)
+                System.out.println(line);
+        }
+    }
+
+    static void update(Scanner sc) throws IOException 
+    {
+        System.out.print("ID to update: ");
+        int id = sc.nextInt(); sc.nextLine();
+        System.out.print("New Name: ");
+        String newName = sc.nextLine();
+        File input = new File(FILE);
+        File temp = new File("temp.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(input));
+             FileWriter fw = new FileWriter(temp)) 
+        {
+            String line;
+            while ((line = br.readLine()) != null) 
+            {
+                String[] parts = line.split(",", 2);
+                if (Integer.parseInt(parts[0]) == id)
+                    fw.write(id + "," + newName + "\n");
+                else
+                    fw.write(line + "\n");
+            }
+        }
+        input.delete();
+        temp.renameTo(input);
+    }
+
+    static void delete(Scanner sc) throws IOException 
+    {
+        System.out.print("ID to delete: ");
+        int id = sc.nextInt();
+        File input = new File(FILE);
+        File temp = new File("temp.txt");
+        try (BufferedReader br = new BufferedReader(new FileReader(input));
+             FileWriter fw = new FileWriter(temp)) 
+        {
+            String line;
+            while ((line = br.readLine()) != null) 
+            {
+                if (Integer.parseInt(line.split(",")[0]) != id)
+                    fw.write(line + "\n");
+            }
+        }
+        input.delete();
+        temp.renameTo(input);
+    }
+}
